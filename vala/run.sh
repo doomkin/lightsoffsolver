@@ -1,0 +1,1 @@
+./lightsoffsolver -i < input.txt

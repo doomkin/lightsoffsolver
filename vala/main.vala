@@ -110,7 +110,7 @@ static void print_usage ()
   stdout.printf ("""The program solves the puzzle Lights Off.
 This program is free software. See http://www.gnu.org/copyleft/gpl.html the license.
 
-Usage: lightsoff-solver [-i]
+Usage: lightsoffsolver [-i]
 010
 111
 010
