@@ -6,7 +6,7 @@ This program is free software. See http://www.gnu.org/copyleft/gpl.html the lice
 
 ## Build
 ```bash
-git clone https://git.parusinf.ru/free/lightsoffsolver.git  
+git clone https://github.com/doomkin/lightsoffsolver.git  
 cd lightsoffsolver  
 make  
 ```
