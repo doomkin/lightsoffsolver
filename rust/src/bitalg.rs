@@ -161,7 +161,7 @@ impl BitGauss {
                 }
 
                 // Weigh out the solution with index i
-                weight = rest.count_ones() + accumulator.count_ones();
+                weight = accumulator.count_ones() + rest.count_ones();
 
                 // Build the solution with less weight
                 if weight < min_weight {
