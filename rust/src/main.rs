@@ -30,7 +30,7 @@ fn main() {
 
     println!("Usage: los <size>\nSolving {} x {}...\n", n, n);
 
-    let mut solver = LightsSolver::with(&field);
+    let mut solver = LightsSolver::from(&field);
     let now = SystemTime::now();
 
     match solver.solve() {

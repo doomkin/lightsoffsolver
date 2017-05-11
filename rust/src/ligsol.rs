@@ -29,7 +29,7 @@ pub struct LightsSolver {
 
 impl LightsSolver {
     /// Creates "Lights Off" solver with specified field.
-    pub fn with(field: &BitMat) -> LightsSolver {
+    pub fn from(field: &BitMat) -> LightsSolver {
         let n_rows = field.n_rows() as isize;
         let n_cols = field.n_cols() as isize;
         let n = n_rows * n_cols;
@@ -66,7 +66,7 @@ impl LightsSolver {
             }
         }
 
-        let alg = BitGauss::with(sys);
+        let alg = BitGauss::from(sys);
         
         LightsSolver {
             alg: alg,

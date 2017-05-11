@@ -30,7 +30,7 @@ impl BitGauss {
     /// Creates boolean gauss algorithm with specified size of system of logical
     /// equations. System contains `row` equations with `col-1` variables.
     #[inline]
-    pub fn with(sys: BitMat) -> BitGauss {
+    pub fn from(sys: BitMat) -> BitGauss {
         BitGauss {
             sys: sys,
             rank: 0,
@@ -61,15 +61,18 @@ impl BitGauss {
     ///
     /// ```
     /// use los::bitalg::BitGauss;
+    /// use los::bitmat::BitMat;
     ///
     /// let n = 3;
-    /// let mut alg = BitGauss::with_size(n, n+1);
-    ///
+    /// let mut sys = BitMat::with_size(n, n+1);
+    /// 
     /// for i in 0..n {
-    ///     alg.sys_mut().set(i, n-i-1, true);
-    ///     alg.sys_mut().set(i, n, true);
+    ///     sys.set(i, n-i-1, true);
+    ///     sys.set(i, n, true);
     /// }
     ///
+    /// let mut alg = BitGauss::from(sys);
+    /// 
     /// assert_eq!(alg.sys().to_string(), "0011\n0101\n1001\n");
     /// alg.gauss();    
     /// assert_eq!(alg.sys().to_string(), "1001\n0101\n0011\n");
