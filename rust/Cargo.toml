@@ -1,0 +1,16 @@
+[package]
+name = "los"
+version = "0.1.0"
+authors = ["Pavel Nikitin"]
+
+
+[lib]
+name = "los"
+path = "src/lib.rs"
+
+[[bin]]
+name = "los"
+path = "src/main.rs"
+
+[dependencies]
+
