@@ -24,6 +24,8 @@ use ::bitvec::BitVec;
 pub struct BitGauss {
     sys: BitMat,
     rank: usize,
+    n_solutions: usize,
+    min_weight: usize,
 }
 
 impl BitGauss {
@@ -34,6 +36,8 @@ impl BitGauss {
         BitGauss {
             sys: sys,
             rank: 0,
+            n_solutions: 0,
+            min_weight: 0,
         }
     }
         
@@ -53,6 +57,18 @@ impl BitGauss {
     #[inline]
     pub fn rank(&self) -> usize {
         self.rank
+    }
+    
+    /// Returns a `n_solutions`.
+    #[inline]
+    pub fn n_solutions(&self) -> usize {
+        self.n_solutions
+    }
+    
+    /// Returns a `min_weight` of solution.
+    #[inline]
+    pub fn min_weight(&self) -> usize {
+        self.min_weight
     }
     
     /// Gausses system with `n_rows` logical equations and `n_cols-1` variables.
@@ -136,14 +152,14 @@ impl BitGauss {
         // The system has 2^(n_vars-rank) solutions
         else {
             let n_rest = n_vars - rank;
-            let n_solutions = 1usize << n_rest;
-            let mut min_weight = n_cols as u32;
+            self.n_solutions = 1usize << n_rest;
+            self.min_weight = n_cols;
             let mut weight;
             let mut rest = BitVec::with_length(n_rest);
             let mut accumulator = BitVec::with_length(n_rows);
 
             // Find a solution with a minimum number of ones
-            for i in 0..n_solutions {
+            for i in 0..self.n_solutions {
                 // Create subset by index i
                 rest.buf_mut()[0] = i;
                 
@@ -161,11 +177,11 @@ impl BitGauss {
                 }
 
                 // Weigh out the solution with index i
-                weight = accumulator.count_ones() + rest.count_ones();
+                weight = (accumulator.count_ones() + rest.count_ones()) as usize;
 
                 // Build the solution with less weight
-                if weight < min_weight {
-                    min_weight = weight;
+                if weight < self.min_weight {
+                    self.min_weight = weight as usize;
 
                     // Get first part of elemets of solution from accumulator
                     for j in 0..rank {

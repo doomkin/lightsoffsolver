@@ -35,7 +35,7 @@ fn main() {
 
     match solver.solve() {
         Some(sol) => println!("{}\nNumber of solutions: {}\nMinimal weight: {}", 
-                              sol, solver.n_solutions(), solver.min_weight()),
+                              sol, solver.alg().n_solutions(), solver.alg().min_weight()),
         None => println!("No solution"),
     }
 

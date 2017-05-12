@@ -23,8 +23,6 @@ pub struct LightsSolver {
     alg: BitGauss,
     n_rows: usize,
     n_cols: usize,
-    n_solutions: usize,
-    min_weight: usize,
 }
 
 impl LightsSolver {
@@ -72,30 +70,19 @@ impl LightsSolver {
             alg: alg,
             n_rows: n_rows as usize,
             n_cols: n_cols as usize,
-            n_solutions: 0,
-            min_weight: 0,
         }
     }
         
-    /// Returns an immutable `n_solutions`.
+    /// Returns a `alg` of solver.
     #[inline]
-    pub fn n_solutions(&self) -> usize {
-        self.n_solutions
+    pub fn alg(&self) -> &BitGauss {
+        &self.alg
     }
-
-    /// Returns an immutable `min_weight`.
-    #[inline]
-    pub fn min_weight(&self) -> usize {
-        self.min_weight
-    }
-
+    
     /// Finds shortest solution in the system.
     pub fn solve(&mut self) -> Option<BitMat> {
         match self.alg.solve() {
             Some(syssol) => {
-                self.n_solutions = 1usize << (self.n_rows * self.n_cols - self.alg.rank());
-                self.min_weight = syssol.count_ones() as usize;
-
                 let mut sol = BitMat::with_size(self.n_rows, self.n_cols);
                 for row in 0..self.n_rows {
                     for col in 0..self.n_cols {
