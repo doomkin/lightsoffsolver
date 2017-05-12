@@ -28,7 +28,6 @@ use std::fmt;
 ///
 /// Vectors have `O(1)` indexing, amortized `O(1)` push (to the end) and
 /// `O(1)` pop (from the end).
-//#[derive(Debug)]
 pub struct BitVec {
     buf: Vec<usize>,
     len: usize,
