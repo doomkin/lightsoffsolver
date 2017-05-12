@@ -2,4 +2,5 @@ src/*.o
 lightsoffsolver
 vala/lightsoffsolver
 rust/target
+rust/bak
 rust/Cargo.lock
